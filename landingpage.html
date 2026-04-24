@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Robotic Truck Loading and Unloading | XYZ Robotics</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.link-button{
+  display:inline-block;
+  background-color:#0055ff;
+  color:rgb(255, 255, 255);
+  text-decoration-line:none;
+  text-decoration-thickness:initial;
+  text-decoration-style:initial;
+  text-decoration-color:initial;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+  border-bottom-right-radius:4px;
+  border-bottom-left-radius:4px;
+  text-align:center;
+  cursor:pointer;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:700;
+  padding:17px 34px 17px 34px;
+  box-shadow:0px 4px 15px 0px rgba(0,85,255,0.2) ;
+  border:0 none black;
+  transition:all 0.2s ease;
+  margin:0 0 0 10px;
+}
+.video-container{
+  position:relative;
+  width:100%;
+  height:0px;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  border-radius:12px 12px 12px 12px;
+  box-shadow:0 15px 30px 0 rgba(0,0,0,0.1) ;
+  padding:60% 0px 0px 0px;
+}
+.video-container video{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+}
+.video-container > div{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+}
+.video-container iframe{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+}
+#itei{
+  padding:110px 0px 110px 0px;
+  background-image:url('https://cdn.xyzrobotics.com/release/en-US/picture/C0D82056-1931-401C-9C06-66B3C80E93A9/Automated truck loading and unloading with Rocky robot.jpg');
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-attachment:scroll;
+  background-size:cover;
+}
+#igot{
+  padding:10px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  color:#555555;
+  font-weight:700;
+  letter-spacing:1px;
+  margin:0 0 18px 0;
+}
+.gjs-row{
+  display:flex;
+  justify-content:flex-start;
+  align-items:stretch;
+  flex-wrap:nowrap;
+  padding-top:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+}
+.gjs-cell{
+  flex-grow:1;
+  flex-basis:100%;
+}
+#iagjb{
+  justify-content:center;
+  align-items:center;
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 40px 0px 40px;
+}
+#i3bty{
+  flex-basis:110%;
+}
+#isbhh{
+  margin:0px 0px 22px 0px;
+  padding:10px 10px 10px 10px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:900;
+  font-size:48px;
+  color:#111111;
+}
+#i71pj{
+  padding:10px 10px 36px 10px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  font-weight:500;
+  color:#555555;
+}
+.link-button:hover{
+  background-color:#0044cc;
+  border:0 none black;
+  transform:translateY(-2px);
+}
+#ic8uo{
+  padding:0px 10px 0px 0px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+#ifllj{
+  color:black;
+  width:90%;
+  border:4px solid white;
+  border-radius:12px 12px 12px 12px;
+  box-shadow:0 25px 50px 0 rgba(0,0,0,0.1) ;
+}
+#i7zlk{
+  padding:110px 0px 110px 0px;
+}
+#itcpj{
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 30px 0px 30px;
+}
+#ims5k{
+  margin:0px 0px 48px 0px;
+  padding:0;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:36px;
+  text-align:center;
+  color:#111111;
+  font-weight:700;
+}
+#ipod5{
+  padding:0px 0px 0px 0px;
+  justify-content:space-between;
+  align-items:center;
+}
+#ijcfl{
+  padding:0px 0px 0px 0px;
+  justify-content:space-between;
+  align-items:center;
+}
+#isltm{
+  margin:0px 0px 0px 0px;
+}
+#i9drp{
+  padding:0px 0px 0px 0px;
+  justify-content:space-between;
+  align-items:center;
+}
+#idd2c{
+  color:black;
+  width:100%;
+}
+#idd2c-2{
+  color:black;
+  width:100%;
+}
+#idd2c-2-2{
+  color:black;
+  width:100%;
+}
+#idd2c-2-2-2{
+  color:black;
+  width:100%;
+}
+#i8rit{
+  padding:100px 0px 100px 0px;
+  background-color:#fcfcfc;
+}
+#ilmvg{
+  margin:0px 0px 16px 0px;
+  padding:0px 40px 0px 0px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:36px;
+  font-weight:700;
+  text-align:center;
+  color:#111111;
+}
+#i0c6z{
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 40px 0px 40px;
+}
+#i2azv{
+  padding:0px 0px 56px 0px;
+  font-size:20px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:500;
+  text-align:center;
+  max-width:820px;
+  margin:0px auto 0px auto;
+}
+#i885j{
+  color:#666666;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  text-align:center;
+  font-weight:500;
+  line-height:1.55em;
+}
+#iln7a{
+  justify-content:space-between;
+  padding:0px 0px 0px 0px;
+}
+#i1wll{
+  flex-basis:125%;
+  margin:0 28px 0 0;
+}
+#iyaxy{
+  display:flex;
+  flex-direction:column;
+}
+#ive2p{
+  width:707px;
+  height:424px;
+}
+#iya8v{
+  background-color:#ffffff;
+  padding:20px 28px 20px 28px;
+  border-radius:12px 12px 12px 12px;
+  margin:0px 0px 16px 0px;
+  border:1px solid #eeeeee;
+  box-shadow:0 10px 20px 0 rgba(0,0,0,0.04) ;
+}
+#i75oj-3{
+  margin:0px 0px 10px 0px;
+  padding:0;
+  font-size:16px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:600;
+  color:#0055ff;
+  letter-spacing:1px;
+}
+#ihy92-2{
+  color:rgb(17, 17, 17);
+  font-size:24px;
+  letter-spacing:normal;
+  margin:0px 0px 12px 0px;
+  padding:0px;
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+#i75oj-2{
+  margin:0;
+  padding:0;
+  font-size:16px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:600;
+  color:#0055ff;
+  letter-spacing:1px;
+}
+#i75oj-2-2{
+  margin:0;
+  padding:0;
+  font-size:16px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:600;
+  color:#0055ff;
+  letter-spacing:1px;
+}
+#idsg7-2{
+  padding:0px 0px 0px 0px;
+  font-size:24px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:600;
+  margin:0 0 12px 0;
+  color:#111111;
+}
+#ihy92-2-2{
+  color:rgb(17, 17, 17);
+  font-size:24px;
+  letter-spacing:normal;
+  margin:0px 0px 12px;
+  padding:0px;
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+#i75oj-3{
+  margin:0px 0px 10px 0px;
+  padding:0;
+  font-size:16px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:600;
+  color:#0055ff;
+  letter-spacing:1px;
+}
+#i0lyh-2{
+  color:#666666;
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size:16px;
+  font-weight:400;
+  line-height:1.55em;
+}
+#igt7f-2{
+  padding:0px 0px 0px 0px;
+}
+#i67gm{
+  background-color:#ffffff;
+  padding:20px 28px 20px 28px;
+  border-radius:12px 12px 12px 12px;
+  margin:0px 0px 0px 0px;
+  border:1px solid #eeeeee;
+  box-shadow:0 10px 20px 0 rgba(0,0,0,0.04) ;
+}
+#iu8at{
+  color:rgb(102, 102, 102);
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size:16px;
+  line-height:1.55em;
+}
+@media (max-width: 768px){
+  .gjs-row{
+    flex-wrap:wrap;
+  }
+  #ic8uo{
+    padding:0px 0px 0px 10px;
+    display:block;
+  }
+  #i3bty{
+    margin:0 0 40px 0;
+  }
+  #iagjb{
+    flex-direction:column;
+  }
+}
+@media (max-width: 480px){
+  #ifllj{
+    width:100%;
+  }
+  #isbhh{
+    font-size:28px;
+    padding:0px 0px 0px 0px;
+    margin:0px 0px 16px 0px;
+  }
+  #igot{
+    font-size:16px;
+    letter-spacing:0px;
+    padding:0px 10px 0px 0px;
+    margin:0px 0px 12px 0px;
+  }
+  #i71pj{
+    font-size:16px;
+    padding:0px 0px 0px 0px;
+    margin:0px 0px 30px 0px;
+  }
+  .link-button{
+    font-size:14px;
+    text-align:center;
+    padding:16px 16px 16px 16px;
+    margin:0px 0px 0px 0px;
+  }
+  #iagjb{
+    padding:0px 24px 0px 24px;
+  }
+  #itei{
+    padding:60px 0px 60px 0px;
+  }
+  #ic8uo{
+    padding:0px 0px 0px 0px;
+  }
+  #i7zlk{
+    padding:60px 0px 60px 0px;
+  }
+  #ims5k{
+    font-size:28px;
+  }
+}
+</style>
+</head>
+<body id="iih4">
+  <div id="itei">
+    <div class="gjs-row" id="iagjb">
+      <div class="gjs-cell" id="i3bty">
+        <div id="igot">ROCKY MOBILE MANIPULATION ROBOT
+          <br/>
+        </div>
+        <h1 id="isbhh">Robotic Truck Loading and Unloading
+        </h1>
+        <div id="i71pj">Keep your dock flowing with enhanced efficiency and safety.
+        </div>
+        <a href="#" target="_self" class="link-button">Request a Solution Package</a>
+      </div>
+      <div class="gjs-cell" id="ic8uo">
+        <img id="ifllj" src="https://cdn.xyzrobotics.com/release/en-US/picture/2AFCA970-C72B-475D-8EBD-64F4EFB41A89/Automated truck loading and unloading with Rocky robot.webp"/>
+      </div>
+    </div>
+  </div>
+  <div id="i7zlk">
+    <div id="itcpj">
+      <h1 id="ims5k">Trusted by Leading Global Enterprises
+      </h1>
+      <div class="gjs-row" id="ijcfl">
+        <div class="gjs-cell" id="isltm">
+          <div class="gjs-row" id="ipod5">
+            <div class="gjs-cell" id="i5bpl">
+              <img id="idd2c" src="https://cdn.xyzrobotics.com/release/en-US/picture/4B69D761-6ED2-409A-85F7-803387C1F009/customer-logo-1.webp"/>
+            </div>
+            <div class="gjs-cell" id="ickfm">
+              <img id="idd2c-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/D1F8B09E-0979-4C93-A66B-B59A231E3C81/customer-logo-2.webp"/>
+            </div>
+          </div>
+        </div>
+        <div class="gjs-cell" id="im1v9">
+          <div class="gjs-row" id="i9drp">
+            <div class="gjs-cell" id="imwhi">
+              <img id="idd2c-2-2-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/E3CE2512-34E6-46EF-AACF-857C12A8D028/customer-logo-3.webp"/>
+            </div>
+            <div class="gjs-cell" id="io3wi">
+              <img id="idd2c-2-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/7BEAC87A-EE1B-4683-BA9E-6AAFB123696F/customer-logo-4.webp"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="i8rit">
+    <div id="i0c6z">
+      <h1 id="ilmvg">End-to-End Dock Automation
+      </h1>
+      <div id="i2azv">
+        <span id="i885j">XYZ Robotics delivers fully automated inbound and outbound solutions, creating a seamless workflow between trucks and storage pallets.</span>
+      </div>
+      <div class="gjs-row" id="iln7a">
+        <div class="gjs-cell" id="i1wll">
+          <div class="video-container">
+            <iframe allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/UUJBZ5T-pFw?&amp;mute=1" autoplay loop muted playsinline="" id="ive2p"></iframe>
+          </div>
+        </div>
+        <div class="gjs-cell" id="iyaxy">
+          <div id="iya8v">
+            <div id="idsg7">
+              <h3 id="i75oj-2" draggable="false" data-lt-tmp-id="lt-219852" spellcheck="false" data-gramm="false" class="gjs-selected">INBOUND
+              </h3>
+            </div>
+            <h3>
+              <h4 id="ihy92-2" draggable="true">Unloading + Sorting + Palletizing
+              </h4>
+            </h3>
+            <div id="igt7f">
+              <span id="iu8at">RockyOne unloads containers onto the conveyor, where an in-line scanner reads and sorts cartons by SKU. RockyOne SE then palletizes to your stacking requirements.</span>
+            </div>
+          </div>
+          <div id="i67gm">
+            <div id="idsg7-2">
+              <h3 id="i75oj-2-2" draggable="false" data-lt-tmp-id="lt-219852" spellcheck="false" data-gramm="false" class="gjs-selected">OUTBOUND
+              </h3>
+            </div>
+            <h3 id="i75oj-3">
+              <h4 id="ihy92-2-2" draggable="true">Unloading + Sorting + Palletizing
+              </h4>
+            </h3>
+            <div id="igt7f-2">
+              <span id="i0lyh-2">RockyOne unloads containers onto the conveyor, where an in-line scanner reads and sorts cartons by SKU. RockyOne SE then palletizes to your stacking requirements.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
