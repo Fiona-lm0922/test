@@ -1,211 +1,1240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XYZ Robotics - Robotic Truck Loading and Unloading</title>
-    <style>
-        /* [Source 1-117] 完整 CSS 样式表集成 */
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: Tahoma, Geneva, sans-serif; }
-        
-        .link-button {
-            display: inline-block; background-color: #0055ff; color: #ffffff;
-            text-decoration: none; border-radius: 4px; text-align: center;
-            cursor: pointer; font-size: 16px; font-weight: 700; padding: 17px 34px;
-            box-shadow: 0px 4px 15px 0px rgba(0,85,255,0.2); transition: all 0.2s ease;
-            margin: 0 0 0 10px; border: 0 none;
-        }
-        .link-button:hover { background-color: #0044cc; transform: translateY(-2px); }
-
-        .video-container {
-            position: relative; width: 100%; height: 0; overflow: hidden;
-            border-radius: 12px; box-shadow: 0 15px 30px 0 rgba(0,0,0,0.1);
-            padding-top: 56.25%;
-        }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
-        .gjs-row { display: flex; justify-content: flex-start; align-items: stretch; flex-wrap: nowrap; padding: 10px; }
-        .gjs-cell { flex-grow: 1; flex-basis: 100%; }
-
-        /* Section: Hero */
-        #itei {
-            padding: 110px 0;
-            background-image: url('https://cdn.xyzrobotics.com/release/en-US/picture/C0D82056-1931-401C-9C06-66B3C80E93A9/Automated truck loading and unloading with Rocky robot.jpg');
-            background-repeat: no-repeat; background-position: center; background-size: cover;
-        }
-        #iagjb { justify-content: center; align-items: center; max-width: 1340px; margin: 0 auto; padding: 0 40px; }
-        #igot { font-size: 20px; color: #555555; font-weight: 700; letter-spacing: 1px; margin-bottom: 18px; }
-        #isbhh { margin: 0 0 22px 0; font-weight: 900; font-size: 48px; color: #111111; line-height: 1.2; }
-        #i71pj { padding: 10px 10px 36px 10px; font-size: 20px; font-weight: 500; color: #555555; }
-        #ifllj { width: 90%; border: 4px solid white; border-radius: 12px; box-shadow: 0 25px 50px 0 rgba(0,0,0,0.1); }
-
-        /* Section: Features & Video */
-        #i8rit { padding: 100px 0; background-color: #fcfcfc; }
-        #i0c6z { max-width: 1340px; margin: 0 auto; padding: 0 40px; }
-        #iz6wg4 { margin-bottom: 22px; font-size: 36px; font-weight: 700; color: #111111; text-align: center; }
-        #i2azv { font-size: 20px; font-weight: 500; text-align: center; max-width: 820px; margin: 0 auto 56px auto; }
-        #i885j { color: #666666; line-height: 1.55em; }
-        #iya8v, #imnok {
-            background-color: #ffffff; padding: 18px 28px; border-radius: 12px;
-            margin-bottom: 16px; border: 1px solid #eeeeee; box-shadow: 0 10px 20px 0 rgba(0,0,0,0.04);
-        }
-        #ihy92-2, #ihy92-2-2 { color: #111111; font-size: 24px; margin-bottom: 12px; }
-        #i75oj-2, #i75oj-2-2 { font-size: 16px; font-weight: 600; color: #0055ff; letter-spacing: 1px; margin: 0; }
-
-        /* Section: Form */
-        #iox5x8 {
-            padding: 100px 0;
-            background-image: url('https://cdn.xyzrobotics.com/release/en-US/picture/0822B21F-895B-4C43-9303-93D13ACAB4CD/lead-form-background.webp');
-            background-position: center; background-size: cover;
-        }
-        .custom-form-1777260350847-kmbm5iu5c {
-            max-width: 600px; background: #ffffff; border-radius: 12px; padding: 40px;
-            box-shadow: 0 25px 60px 0 rgba(0,0,0,0.25); border: 1px solid #0044ff;
-        }
-        .form-group { display: flex; gap: 20px; margin-bottom: 15px; width: 100%; flex-wrap: wrap; }
-        .form-item { flex: 1; min-width: 200px; display: flex; flex-direction: column; }
-        label { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: #111111; }
-        input, textarea, select {
-            padding: 13px 14px; border: 1px solid #dddddd; border-radius: 6px;
-            font-family: inherit; font-size: 16px;
-        }
-        input:focus, textarea:focus { border-color: #0055ff; outline: none; }
-        #i8h55z {
-            width: 100%; padding: 18px; background: #0055ff; color: #fff;
-            border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s;
-        }
-        #i8h55z:hover { background: #0044cc; transform: translateY(-2px); }
-
-        /* [Source 89-117] Responsive Media Queries */
-        @media (max-width: 768px) {
-            .gjs-row { flex-wrap: wrap; }
-            #iagjb { flex-direction: column; }
-            #i3bty { margin-bottom: 40px; }
-        }
-        @media (max-width: 480px) {
-            #isbhh { font-size: 28px; }
-            #iz6wg4, #idvckz { font-size: 22px; }
-            .custom-form-1777260350847-kmbm5iu5c { padding: 20px; }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Robotic Truck Loading and Unloading | XYZ Robotics</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+.link-button{
+  display:inline-block;
+  background-color:#0055ff;
+  color:rgb(255, 255, 255);
+  text-decoration-line:none;
+  text-decoration-thickness:initial;
+  text-decoration-style:initial;
+  text-decoration-color:initial;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+  border-bottom-right-radius:4px;
+  border-bottom-left-radius:4px;
+  text-align:center;
+  cursor:pointer;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:700;
+  padding:17px 34px 17px 34px;
+  box-shadow:0px 4px 15px 0px rgba(0,85,255,0.2) ;
+  border:0 none black;
+  transition:all 0.2s ease;
+  margin:0 0 0 10px;
+}
+.video-container{
+  position:relative;
+  width:100%;
+  height:0px;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  border-radius:12px 12px 12px 12px;
+  box-shadow:0 15px 30px 0 rgba(0,0,0,0.1) ;
+  padding:56.25% 0px 0px 0px;
+}
+.video-container video{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+}
+.video-container > div{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+}
+.video-container iframe{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+}
+#itei{
+  padding:110px 0px 110px 0px;
+  background-image:url('https://cdn.xyzrobotics.com/release/en-US/picture/C0D82056-1931-401C-9C06-66B3C80E93A9/Automated truck loading and unloading with Rocky robot.jpg');
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-attachment:scroll;
+  background-size:cover;
+}
+#igot{
+  padding:10px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  color:#555555;
+  font-weight:700;
+  letter-spacing:1px;
+  margin:0 0 18px 0;
+}
+.gjs-row{
+  display:flex;
+  justify-content:flex-start;
+  align-items:stretch;
+  flex-wrap:nowrap;
+  padding-top:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+}
+.gjs-cell{
+  flex-grow:1;
+  flex-basis:100%;
+}
+#iagjb{
+  justify-content:center;
+  align-items:center;
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 40px 0px 40px;
+}
+#i3bty{
+  flex-basis:110%;
+}
+#isbhh{
+  margin:0px 0px 22px 0px;
+  padding:10px 10px 10px 10px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:900;
+  font-size:48px;
+  color:#111111;
+}
+#i71pj{
+  padding:10px 10px 36px 10px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  font-weight:500;
+  color:#555555;
+}
+.link-button:hover{
+  background-color:#0044cc;
+  border:0 none black;
+  transform:translateY(-2px);
+}
+#ic8uo{
+  padding:0px 10px 0px 0px;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+#ifllj{
+  color:black;
+  width:90%;
+  border:4px solid white;
+  border-radius:12px 12px 12px 12px;
+  box-shadow:0 25px 50px 0 rgba(0,0,0,0.1) ;
+}
+#i7zlk{
+  padding:90px 0px 90px 0px;
+}
+#itcpj{
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 10px 0px 10px;
+}
+#ipod5{
+  padding:0px 0px 0px 0px;
+  justify-content:space-between;
+  align-items:center;
+}
+#ijcfl{
+  padding:0px 0px 0px 0px;
+  justify-content:space-between;
+  align-items:center;
+}
+#isltm{
+  margin:0px 0px 0px 0px;
+}
+#i9drp{
+  padding:0px 0px 0px 0px;
+  justify-content:space-between;
+  align-items:center;
+}
+#idd2c{
+  color:black;
+  width:100%;
+}
+#idd2c-2{
+  color:black;
+  width:100%;
+}
+#idd2c-2-2{
+  color:black;
+  width:100%;
+}
+#idd2c-2-2-2{
+  color:black;
+  width:100%;
+}
+#i8rit{
+  padding:100px 0px 100px 0px;
+  background-color:#fcfcfc;
+}
+#i0c6z{
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 40px 0px 40px;
+}
+#i2azv{
+  padding:0px 0px 0px 0px;
+  font-size:20px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:500;
+  text-align:center;
+  max-width:820px;
+  margin:0px auto 56px auto;
+}
+#i885j{
+  color:#666666;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  text-align:center;
+  font-weight:500;
+  line-height:1.55em;
+}
+#iln7a{
+  justify-content:space-between;
+  padding:0px 0px 0px 0px;
+}
+#i1wll{
+  flex-basis:150%;
+  margin:0 28px 0 0;
+}
+#iyaxy{
+  display:flex;
+  flex-direction:column;
+}
+#iya8v{
+  background-color:#ffffff;
+  padding:18px 28px 18px 28px;
+  border-radius:12px 12px 12px 12px;
+  margin:0px 0px 16px 0px;
+  border:1px solid #eeeeee;
+  box-shadow:0 10px 20px 0 rgba(0,0,0,0.04) ;
+}
+#ihy92-2{
+  color:rgb(17, 17, 17);
+  font-size:24px;
+  letter-spacing:normal;
+  margin:0px 0px 12px 0px;
+  padding:0px;
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+#i75oj-2{
+  margin:0;
+  padding:0;
+  font-size:16px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:600;
+  color:#0055ff;
+  letter-spacing:1px;
+}
+.gjs-selected{
+  font-weight:700;
+}
+#i75oj-2-2{
+  margin:0;
+  padding:0;
+  font-size:16px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:600;
+  color:#0055ff;
+  letter-spacing:1px;
+}
+#ihy92-2-2{
+  color:rgb(17, 17, 17);
+  font-size:24px;
+  letter-spacing:normal;
+  margin:0px 0px 12px 0px;
+  padding:0px;
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+#imnok{
+  background-color:#ffffff;
+  padding:18px 28px 18px 28px;
+  border-radius:12px 12px 12px 12px;
+  margin:0px 0px 0px 0px;
+  border:1px solid #eeeeee;
+  box-shadow:0 10px 20px 0 rgba(0,0,0,0.04) ;
+}
+#is9mk-2{
+  color:#666666;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  line-height:1.55em;
+  font-weight:400;
+}
+#i4k1s{
+  padding:0px 0px 1px 0px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:400;
+  font-size:16px;
+  color:#666666;
+  line-height:1.55em;
+}
+#ibmkh-2{
+  padding:0px 0px 0px 0px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:24px;
+  font-weight:700;
+}
+#i50zd-2{
+  margin:0px 0px 14px;
+  padding:0px;
+  font-size:24px;
+  color:#111111;
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+#ib0oh-2{
+  padding:0px 0px 0px 0px;
+  max-width:380px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:500;
+  font-size:20px;
+  color:#444444;
+  line-height:1.6em;
+}
+#is2ry-2{
+  padding:0px 0px 0px 0px;
+}
+#i0rxs-2{
+  margin:0px 0px 14px;
+  padding:0px;
+  font-size:24px;
+  color:rgb(17, 17, 17);
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+#if4hw-2{
+  padding:0px 0px 0px 0px;
+}
+#id6yl-2{
+  padding:0px;
+  font-size:24px;
+  color:rgb(17, 17, 17);
+  font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin:0 0 14px 0;
+}
+#i8k53-2{
+  padding:0px 0px 0px 0px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  font-weight:500;
+  line-height:1.6em;
+  color:#444444;
+  max-width:380px;
+}
+#ig3bd-2{
+  color:black;
+  width:52px;
+  height:52px;
+  border-radius:8px 8px 8px 8px;
+  margin:0 0 22px 0;
+}
+#iwp533{
+  margin:0 48px 0 0;
+}
+#i2bzm-2{
+  color:black;
+  width:52px;
+  height:52px;
+  border-radius:8px 8px 8px 8px;
+  margin:0 0 22px 0;
+}
+#isvre-2{
+  padding:0px 0px 0px 0px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  font-weight:500;
+  color:#444444;
+  line-height:1.6em;
+  max-width:380px;
+}
+#ipdswx{
+  margin:0px 48px 0px 0px;
+}
+#i47cb-2{
+  color:black;
+  width:52px;
+  height:52px;
+  border-radius:8px 8px 8px 8px;
+  margin:0 0 22px 0;
+}
+#ixk7xx{
+  margin:0 0 22px 0;
+}
+#i57nro{
+  justify-content:space-between;
+  align-items:stretch;
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 40px 0px 40px;
+}
+#iq33so{
+  padding:100px 0px 100px 0px;
+}
+#if9lkt{
+  padding:100px 0px 100px 0px;
+  background-color:#f8f9fa;
+}
+#iboa4t{
+  margin:0px 0px 48px 0px;
+  padding:0;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:36px;
+  font-weight:700;
+  color:#111111;
+  text-align:center;
+}
+#ims5k-2{
+  margin:0;
+  padding:0;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:36px;
+  text-align:center;
+  color:#111111;
+  font-weight:700;
+}
+#iz6wg4{
+  margin:0px 0px 22px 0px;
+  padding:0;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:36px;
+  font-weight:700;
+  color:#111111;
+  text-align:center;
+}
+#i7ib6o{
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 40px 0px 40px;
+}
+#i9v2fh{
+  margin:0px 0px 56px 0px;
+  padding:0;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:36px;
+  font-weight:700;
+  color:#111111;
+  text-align:center;
+}
+#iyog4r{
+  justify-content:space-between;
+  padding:0px 0px 0px 0px;
+}
+#iwrcec{
+  margin:0 28px 0 0;
+}
+#ibwq9g{
+  margin:0 28px 0 0;
+  padding:0px 0px 0px 0px;
+}
+#ipv5o7{
+  display:block;
+  max-width:100%;
+  height:auto;
+  border-radius:12px 12px 12px 12px;
+  box-shadow:0 8px 24px 0 rgba(0,0,0,0.05) ;
+  transition:all 0.25s ease;
+}
+#i3biqd{
+  display:inline-block;
+}
+#ipv5o7:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 24px 0 rgba(0,0,0,0.09) ;
+}
+#ipv5o7-2{
+  display:block;
+  max-width:100%;
+  height:auto;
+  border-radius:12px 12px 12px 12px;
+  box-shadow:0 8px 24px 0 rgba(0,0,0,0.05) ;
+  transition:all 0.25s ease;
+}
+#ipv5o7-2:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 24px 0 rgba(0,0,0,0.09) ;
+}
+#i3biqd-2{
+  display:inline-block;
+}
+#ipv5o7-2-2{
+  display:block;
+  max-width:100%;
+  height:auto;
+  border-radius:12px 12px 12px 12px;
+  box-shadow:0 8px 24px 0 rgba(0,0,0,0.05) ;
+  transition:all 0.25s ease;
+}
+#ipv5o7-2-2:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 24px 0 rgba(0,0,0,0.09) ;
+}
+#i3biqd-2-2{
+  display:inline-block;
+}
+#iox5x8{
+  padding:100px 0px 100px 0px;
+  background-image:url('https://cdn.xyzrobotics.com/release/en-US/picture/0822B21F-895B-4C43-9303-93D13ACAB4CD/lead-form-background.webp');
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-attachment:scroll;
+  background-size:cover;
+}
+#ima0po{
+  max-width:1340px;
+  margin:0px auto 0px auto;
+  padding:0px 40px 0px 40px;
+}
+#ix75mf{
+  justify-content:space-between;
+  align-items:stretch;
+  padding:0px 0px 0px 0px;
+  margin:0 0 18px 0;
+}
+#i3g0ml{
+  margin:0 80px 0 0;
+}
+#idvckz{
+  margin:0px 0px 18px 0px;
+  padding:0;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:36px;
+  font-weight:700;
+  line-height:1.15em;
+  color:#ffffff;
+}
+#iqos7h{
+  padding:0px 0px 0px 0px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:20px;
+  color:rgba(255,255,255,0.85);
+  font-weight:500;
+  line-height:1.6em;
+  margin:0 0 32px 0;
+}
+#id48i9{
+  color:black;
+  width:240px;
+  height:320px;
+  border-radius:6px 6px 6px 6px;
+  border:1px solid rgba(255,255,255,0.2);
+  box-shadow:0 20px 50px 0 rgba(0,0,0,0.3) ;
+  margin:0 0 24px 0;
+}
+#iw08cd{
+  padding:0px 0px 0px 0px;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:700;
+  color:rgba(255,255,255,0.85);
+  letter-spacing:1px;
+}
+.custom-form-1777260350847-kmbm5iu5c{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  border-top-width:1px;
+  border-right-width:1px;
+  border-bottom-width:1px;
+  border-left-width:1px;
+  border-top-style:solid;
+  border-right-style:solid;
+  border-bottom-style:solid;
+  border-left-style:solid;
+  border-top-color:rgb(0, 68, 255);
+  border-right-color:rgb(0, 68, 255);
+  border-bottom-color:rgb(0, 68, 255);
+  border-left-color:rgb(0, 68, 255);
+  border-image-source:initial;
+  border-image-slice:initial;
+  border-image-width:initial;
+  border-image-outset:initial;
+  border-image-repeat:initial;
+  max-width:600px;
+  background-color:#ffffff;
+  border-radius:12px 12px 12px 12px;
+  padding:40px 40px 40px 40px;
+  box-shadow:0 25px 60px 0 rgba(0,0,0,0.25) ;
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group{
+  display:flex;
+  column-gap:20px;
+  margin-bottom:10px;
+  width:100%;
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group .form-item{
+  flex-grow:1;
+  flex-shrink:1;
+  flex-basis:0%;
+  display:flex;
+  flex-direction:column;
+  row-gap:5px;
+  column-gap:5px;
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group label{
+  display:block;
+  margin-bottom:5px;
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group label:has(+ input[required])::before, .custom-form-1777260350847-kmbm5iu5c .form-group label:has(+ textarea[required])::before{
+  content:"*";
+  color:rgb(255, 77, 79);
+  margin-right:4px;
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group input, .custom-form-1777260350847-kmbm5iu5c .form-group textarea{
+  width:100%;
+  padding-top:8px;
+  padding-right:8px;
+  padding-bottom:8px;
+  padding-left:8px;
+  border-top-width:1px;
+  border-right-width:1px;
+  border-bottom-width:1px;
+  border-left-width:1px;
+  border-top-style:solid;
+  border-right-style:solid;
+  border-bottom-style:solid;
+  border-left-style:solid;
+  border-top-color:rgb(217, 217, 217);
+  border-right-color:rgb(217, 217, 217);
+  border-bottom-color:rgb(217, 217, 217);
+  border-left-color:rgb(217, 217, 217);
+  border-image-source:initial;
+  border-image-slice:initial;
+  border-image-width:initial;
+  border-image-outset:initial;
+  border-image-repeat:initial;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+  border-bottom-right-radius:4px;
+  border-bottom-left-radius:4px;
+  box-sizing:border-box;
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group input:focus, .custom-form-1777260350847-kmbm5iu5c .form-group textarea:focus{
+  outline-color:initial;
+  outline-style:none;
+  outline-width:initial;
+  border-top-color:rgb(0, 68, 255);
+  border-right-color:rgb(0, 68, 255);
+  border-bottom-color:rgb(0, 68, 255);
+  border-left-color:rgb(0, 68, 255);
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group textarea{
+  min-height:80px;
+  resize:vertical;
+}
+.custom-form-1777260350847-kmbm5iu5c button[type="submit"]{
+  width:120px;
+  padding-top:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  background-color:rgb(24, 144, 255);
+  color:white;
+  border-top-width:medium;
+  border-right-width:medium;
+  border-bottom-width:medium;
+  border-left-width:medium;
+  border-top-style:none;
+  border-right-style:none;
+  border-bottom-style:none;
+  border-left-style:none;
+  border-top-color:currentcolor;
+  border-right-color:currentcolor;
+  border-bottom-color:currentcolor;
+  border-left-color:currentcolor;
+  border-image-source:initial;
+  border-image-slice:initial;
+  border-image-width:initial;
+  border-image-outset:initial;
+  border-image-repeat:initial;
+  border-top-left-radius:4px;
+  border-top-right-radius:4px;
+  border-bottom-right-radius:4px;
+  border-bottom-left-radius:4px;
+  cursor:pointer;
+  font-size:16px;
+  transition-behavior:normal;
+  transition-duration:0.3s;
+  transition-timing-function:ease;
+  transition-delay:0s;
+  transition-property:background-color;
+}
+.custom-form-1777260350847-kmbm5iu5c #recaptcha_container_publicity{
+  width:256px;
+  background-color:rgb(24, 144, 255);
+  align-self:baseline;
+  height:60px;
+  margin-bottom:10px;
+}
+.custom-form-1777260350847-kmbm5iu5c button[type="submit"]:hover{
+  background-color:rgb(30, 128, 255);
+}
+.custom-form-1777260350847-kmbm5iu5c button[type="submit"]:active{
+  background-color:rgb(30, 128, 255);
+}
+.custom-form-1777260350847-kmbm5iu5c .checkbox-group{
+  align-items:flex-start;
+}
+.custom-form-1777260350847-kmbm5iu5c .checkbox-label{
+  display:flex;
+  align-items:flex-start;
+  row-gap:8px;
+  column-gap:8px;
+  cursor:pointer;
+  font-size:14px;
+  line-height:1.5;
+}
+.custom-form-1777260350847-kmbm5iu5c .checkbox-label input[type="checkbox"]{
+  width:16px;
+  height:16px;
+  margin-top:3px;
+  cursor:pointer;
+  accent-color:rgb(24, 144, 255);
+}
+.custom-form-1777260350847-kmbm5iu5c .checkbox-label a{
+  color:rgb(24, 144, 255);
+  text-decoration-line:underline;
+  text-decoration-thickness:initial;
+  text-decoration-style:initial;
+  text-decoration-color:initial;
+  cursor:pointer;
+}
+.custom-form-1777260350847-kmbm5iu5c .checkbox-label a:hover{
+  color:rgb(30, 128, 255);
+}
+.custom-form-1777260350847-kmbm5iu5c .form-group .checkbox-label-privacy-policy{
+  display:flex;
+  align-items:center;
+}
+.custom-form-1777260350847-kmbm5iu5c .checkbox-label-text{
+  display:flex;
+  align-items:center;
+  row-gap:8px;
+  column-gap:8px;
+}
+#i9fk3b{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.4px;
+  color:#111111;
+}
+#ifq5dg{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.4px;
+  color:#111111;
+}
+#irdkda{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:0.4px;
+  color:#111111;
+}
+#ijwuhh{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.4px;
+  color:#111111;
+}
+#i38azq{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:0.4px;
+  color:#111111;
+}
+#igzq9j{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:500;
+  padding:13px 14px 13px 14px;
+  border-radius:6px 6px 6px 6px;
+  border:1px solid #dddddd;
+}
+#ij79sv{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-weight:500;
+  font-size:16px;
+  padding:13px 14px 13px 14px;
+  border-radius:6px 6px 6px 6px;
+  border:1px solid #dddddd;
+}
+#it1e7x{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:500;
+  padding:13px 14px 13px 14px;
+  border-radius:6px 6px 6px 6px;
+  border:1px solid #dddddd;
+}
+#ikplxm{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:500;
+  border-radius:6px 6px 6px 6px;
+  padding:13px 14px 13px 14px;
+  border:1px solid #dddddd;
+}
+#ivjy4f{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:14px;
+  font-weight:700;
+}
+#i4n0gf{
+  color:#111111;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:14px;
+  letter-spacing:0.4px;
+  text-transform:uppercase;
+  font-weight:700;
+}
+#ivi2zo{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:500;
+  border-radius:6px 6px 6px 6px;
+  padding:13px 14px 13px 14px;
+  border:1px solid #dddddd;
+}
+#iwdgsf{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  font-weight:500;
+  color:#7d7d7d;
+  padding:13px 14px 13px 14px;
+  border-radius:6px 6px 6px 6px;
+  border:1px solid #dddddd;
+}
+.checkbox-label-text{
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:14px;
+  font-weight:500;
+  color:#111111;
+}
+#i8h55z{
+  width:100%;
+  padding:18px 18px 18px 18px;
+  background-color:#0055ff;
+  margin:8px 0 0 0;
+  color:#fefefe;
+  font-weight:700;
+  font-family:Tahoma, Geneva, sans-serif;
+  font-size:16px;
+  transition:all 0.2s ease;
+}
+#igzq9j:active{
+  border:1px solid #0055ff;
+  box-shadow:0 0px 0px 3px rgba(0,85,255,0.1) ;
+}
+#ij79sv:active{
+  border:1px solid #0055ff;
+  box-shadow:0 0 0px 3px rgba(0,85,255,0.1) ;
+}
+#it1e7x:active{
+  border:1px solid #0055ff;
+  box-shadow:0 0 0px 3px rgba(0,85,255,0.1) ;
+}
+#ikplxm:active{
+  border:1px solid #0055ff;
+  box-shadow:0 0 0px 3px rgba(0,85,255,0.1) ;
+}
+#ivi2zo:active{
+  border:1px solid #0055ff;
+  box-shadow:0 0 0px 3px rgba(0,85,255,0.1) ;
+}
+#iwdgsf:active{
+  border:1px solid #0055ff;
+  box-shadow:0 0 0px 3px rgba(0,85,255,0.1) ;
+}
+#i8h55z:hover{
+  background-color:#0044cc;
+  transform:translateY(-2px);
+}
+@media (max-width: 768px){
+  .gjs-row{
+    flex-wrap:wrap;
+  }
+  #ic8uo{
+    padding:0px 0px 0px 10px;
+    display:block;
+  }
+  #i3bty{
+    margin:0 0 40px 0;
+  }
+  #iagjb{
+    flex-direction:column;
+  }
+}
+@media (max-width: 480px){
+  #ifllj{
+    width:100%;
+  }
+  #isbhh{
+    font-size:28px;
+    padding:0px 0px 0px 0px;
+    margin:0px 0px 16px 0px;
+  }
+  #igot{
+    font-size:16px;
+    letter-spacing:0px;
+    padding:0px 10px 0px 0px;
+    margin:0px 0px 12px 0px;
+  }
+  #i71pj{
+    font-size:16px;
+    padding:0px 0px 0px 0px;
+    margin:0px 0px 30px 0px;
+    letter-spacing:0px;
+  }
+  .link-button{
+    font-size:14px;
+    text-align:center;
+    padding:16px 16px 16px 16px;
+    margin:0px 0px 0px 0px;
+  }
+  #iagjb{
+    padding:0px 24px 0px 24px;
+  }
+  #itei{
+    padding:60px 0px 60px 0px;
+  }
+  #ic8uo{
+    padding:0px 0px 0px 0px;
+  }
+  #i7zlk{
+    padding:56px 0px 56px 0px;
+  }
+  #itcpj{
+    padding:0px 24px 0px 24px;
+  }
+  #i8rit{
+    padding:60px 0px 60px 0px;
+  }
+  #i0c6z{
+    padding:0px 24px 0px 24px;
+  }
+  #i885j{
+    font-size:16px;
+    line-height:1em;
+    letter-spacing:0px;
+  }
+  #i2azv{
+    margin:0px auto 24px auto;
+  }
+  #i1wll{
+    margin:0px 0px 20px 0px;
+  }
+  #iya8v{
+    margin:0px 0px 12px 0px;
+    padding:18px 20px 18px 20px;
+  }
+  #ihy92-2{
+    font-size:20px;
+  }
+  #is9mk-2{
+    font-size:16px;
+    letter-spacing:0px;
+    font-weight:400;
+  }
+  #imnok{
+    padding:18px 20px 18px 20px;
+  }
+  #ihy92-2-2{
+    font-size:20px;
+  }
+  #i50zd-2{
+    font-size:20px;
+    margin:0px 0px 12px 0px;
+  }
+  #ib0oh-2{
+    font-size:16px;
+  }
+  #i0rxs-2{
+    font-size:20px;
+    margin:0px 0px 12px 0px;
+  }
+  #isvre-2{
+    font-size:16px;
+  }
+  #id6yl-2{
+    font-size:20px;
+    margin:0px 0px 12px 0px;
+  }
+  #i8k53-2{
+    font-size:16px;
+  }
+  #ig3bd-2{
+    margin:0px 0px 16px 0px;
+  }
+  #iwp533{
+    margin:0px 0px 24px 0px;
+  }
+  #i2bzm-2{
+    margin:0px 0px 16px 0px;
+  }
+  #ipdswx{
+    margin:0px 0px 24px 0px;
+  }
+  #i47cb-2{
+    margin:0px 0px 16px 0px;
+  }
+  #i57nro{
+    padding:0px 24px 0px 24px;
+  }
+  #iq33so{
+    padding:60px 0px 60px 0px;
+  }
+  #ims5k-2{
+    font-size:22px;
+    margin:0px 0px 36px 0px;
+  }
+  #if9lkt{
+    padding:60px 0px 60px 0px;
+  }
+  #i9v2fh{
+    font-size:22px;
+    margin:0px 0px 36px 0px;
+  }
+  #iz6wg4{
+    font-size:22px;
+  }
+  #iyog4r{
+    padding:0px 0px 0px 0px;
+  }
+  #i7ib6o{
+    padding:0px 24px 0px 24px;
+  }
+  #ibwq9g{
+    margin:0px 0px 20px 0px;
+  }
+  #iwrcec{
+    margin:0px 0px 20px 0px;
+  }
+}
+</style>
 </head>
-<body>
-    <section id="itei">
-        <div class="gjs-row" id="iagjb">
-            <div class="gjs-cell" id="i3bty">
-                <div id="igot">ROCKY MOBILE MANIPULATION ROBOT</div>
-                <h1 id="isbhh">Robotic Truck Loading and Unloading</h1>
-                <div id="i71pj">Keep your dock flowing with enhanced efficiency and safety.</div>
-                <a href="#iox5x8" class="link-button">Request a Solution Package</a>
-            </div>
-            <div class="gjs-cell" id="ic8uo">
-                <img id="ifllj" src="https://cdn.xyzrobotics.com/release/en-US/picture/2AFCA970-C72B-475D-8EBD-64F4EFB41A89/Automated truck loading and unloading with Rocky robot.webp" alt="Rocky Robot">
-            </div>
+<body id="iih4">
+  <div id="itei">
+    <div class="gjs-row" id="iagjb">
+      <div class="gjs-cell" id="i3bty">
+        <div id="igot">ROCKY MOBILE MANIPULATION ROBOT
+          <br/>
         </div>
-    </section>
-
-    <section id="i7zlk">
-        <div id="itcpj">
-            <h2 id="iz6wg4">Trusted by Leading Global Enterprises</h2>
-            <div class="gjs-row" id="ijcfl">
-                <div class="gjs-cell"><img id="idd2c" src="https://cdn.xyzrobotics.com/release/en-US/picture/4B69D761-6ED2-409A-85F7-803387C1F009/customer-logo-1.webp" style="width:100%"></div>
-                <div class="gjs-cell"><img id="idd2c-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/D1F8B09E-0979-4C93-A66B-B59A231E3C81/customer-logo-2.webp" style="width:100%"></div>
-                <div class="gjs-cell"><img id="idd2c-2-2-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/E3CE2512-34E6-46EF-AACF-857C12A8D028/customer-logo-3.webp" style="width:100%"></div>
-                <div class="gjs-cell"><img id="idd2c-2-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/7BEAC87A-EE1B-4683-BA9E-6AAFB123696F/customer-logo-4.webp" style="width:100%"></div>
-            </div>
+        <h1 id="isbhh">Robotic Truck Loading and Unloading
+        </h1>
+        <div id="i71pj">Keep your dock flowing with enhanced efficiency and safety.
         </div>
-    </section>
-
-    <section id="i8rit">
-        <div id="i0c6z">
-            <h2 id="iz6wg4">End-to-End Dock Automation</h2>
-            <div id="i2azv">
-                <span id="i885j">XYZ Robotics delivers fully automated inbound and outbound solutions, creating a seamless workflow between trucks and storage pallets.</span>
+        <a href="#" target="_self" class="link-button">Request a Solution Package</a>
+      </div>
+      <div class="gjs-cell" id="ic8uo">
+        <img id="ifllj" src="https://cdn.xyzrobotics.com/release/en-US/picture/2AFCA970-C72B-475D-8EBD-64F4EFB41A89/Automated truck loading and unloading with Rocky robot.webp"/>
+      </div>
+    </div>
+  </div>
+  <div id="i7zlk">
+    <div id="itcpj">
+      <h2 id="iboa4t">
+        <h1 id="ims5k-2" draggable="false" data-lt-tmp-id="lt-499508" spellcheck="false" data-gramm="false" class="gjs-selected">Trusted by Leading Global Enterprises
+        </h1>
+      </h2>
+      <div class="gjs-row" id="ijcfl">
+        <div class="gjs-cell" id="isltm">
+          <div class="gjs-row" id="ipod5">
+            <div class="gjs-cell" id="i5bpl">
+              <img id="idd2c" src="https://cdn.xyzrobotics.com/release/en-US/picture/4B69D761-6ED2-409A-85F7-803387C1F009/customer-logo-1.webp"/>
             </div>
-            <div class="gjs-row" id="iln7a">
-                <div class="gjs-cell" id="i1wll">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/UUJBZ5T-pFw?autoplay=1&mute=1&loop=1" allowfullscreen></iframe>
-                    </div>
-                </div>
-                <div class="gjs-cell" id="iyaxy">
-                    <div id="iya8v">
-                        <h3 id="i75oj-2">INBOUND</h3>
-                        <h4 id="ihy92-2">Unloading + Sorting + Palletizing</h4>
-                        <div id="is9mk-2">RockyOne unloads containers onto the conveyor, where an in-line scanner reads and sorts cartons by SKU. RockyOne SE then palletizes to your stacking requirements.</div>
-                    </div>
-                    <div id="imnok">
-                        <h3 id="i75oj-2-2">OUTBOUND</h3>
-                        <h4 id="ihy92-2-2">Depalletizing + Loading</h4>
-                        <div id="i4k1s">RockyOne SE depalletizes, and RockyOne loads into containers. Multi-pick capability drives even higher throughput.</div>
-                    </div>
-                </div>
+            <div class="gjs-cell" id="ickfm">
+              <img id="idd2c-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/D1F8B09E-0979-4C93-A66B-B59A231E3C81/customer-logo-2.webp"/>
             </div>
+          </div>
         </div>
-    </section>
-
-    <section id="iox5x8">
-        <div id="ima0po">
-            <div class="gjs-row" id="ix75mf">
-                <div class="gjs-cell" id="i3g0ml">
-                    <h2 id="idvckz" style="color:white">Bring 24/7 Predictability to Your Dock.</h2>
-                    <div id="iqos7h">Connect with our team to receive technical schematics and a tailored ROI analysis.</div>
-                    <img id="id48i9" src="https://cdn.xyzrobotics.com/release/en-US/picture/B0D03A6E-9158-484D-9188-91446CEBC28A/Rocky-Series-MMR-brochure-cover-image.png" style="width:240px; border-radius:6px;">
-                    <div id="iw08cd" style="color:white; margin-top:20px;">✓ FREE SOLUTION PACKAGE</div>
-                </div>
-                <div class="gjs-cell">
-                    <form class="custom-form-1777260350847-kmbm5iu5c">
-                        <div class="form-group">
-                            <div class="form-item">
-                                <label>NAME *</label>
-                                <input type="text" placeholder="Name" required>
-                            </div>
-                            <div class="form-item">
-                                <label>COMPANY NAME *</label>
-                                <input type="text" placeholder="Company Name" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-item">
-                                <label>POSITION</label>
-                                <input type="text" placeholder="Position">
-                            </div>
-                            <div class="form-item">
-                                <label>WORK EMAIL *</label>
-                                <input type="email" placeholder="Email" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-item">
-                                <label>INQUIRY APPLICATION *</label>
-                                <select required>
-                                    <option value="">Choose your application...</option>
-                                    <option value="unloading">Truck Unloading</option>
-                                    <option value="loading">Truck Loading</option>
-                                    <option value="depalletizing">Depalletizing</option>
-                                    <option value="palletizing">Palletizing</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-item">
-                                <label>Additional Notes (Optional)</label>
-                                <textarea placeholder="E.g., annual container volume, typical SKU dimensions, or warehouse location..."></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="checkbox-label" style="display:flex; align-items:center; gap:10px; font-weight:500;">
-                                <input type="checkbox" required> 
-                                <span>I have read and consent to the <a href="https://www.xyzrobotics.com/privacy-policy" target="_blank">privacy policy</a>.</span>
-                            </label>
-                        </div>
-                        <button type="submit" id="i8h55z">Get the Solution Package</button>
-                    </form>
-                </div>
+        <div class="gjs-cell" id="im1v9">
+          <div class="gjs-row" id="i9drp">
+            <div class="gjs-cell" id="imwhi">
+              <img id="idd2c-2-2-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/E3CE2512-34E6-46EF-AACF-857C12A8D028/customer-logo-3.webp"/>
             </div>
+            <div class="gjs-cell" id="io3wi">
+              <img id="idd2c-2-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/7BEAC87A-EE1B-4683-BA9E-6AAFB123696F/customer-logo-4.webp"/>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+  <div id="i8rit">
+    <div id="i0c6z">
+      <h2 id="iz6wg4">End-to-End Dock Automation
+      </h2>
+      <div id="i2azv">
+        <span id="i885j">XYZ Robotics delivers fully automated inbound and outbound solutions, creating a seamless workflow between trucks and storage pallets.</span>
+      </div>
+      <div class="gjs-row" id="iln7a">
+        <div class="gjs-cell" id="i1wll">
+          <div class="video-container">
+            <iframe allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/UUJBZ5T-pFw?&amp;mute=1" autoplay loop muted playsinline="" id="ive2p"></iframe>
+          </div>
+        </div>
+        <div class="gjs-cell" id="iyaxy">
+          <div id="iya8v">
+            <div id="idsg7">
+              <h3 id="i75oj-2" draggable="false" data-lt-tmp-id="lt-219852" spellcheck="false" data-gramm="false" class="gjs-selected">INBOUND
+              </h3>
+            </div>
+            <h3 id="i75oj">
+              <h4 id="ihy92-2" draggable="true">Unloading + Sorting + Palletizing
+              </h4>
+            </h3>
+            <div id="igt7f">
+              <span id="is9mk-2">RockyOne unloads containers onto the conveyor, where an in-line scanner reads and sorts cartons by SKU. RockyOne SE then palletizes to your stacking requirements.</span>
+            </div>
+          </div>
+          <div id="imnok">
+            <div id="idsg7">
+              <h3 id="i75oj-2-2" draggable="false" data-lt-tmp-id="lt-219852" spellcheck="false" data-gramm="false" class="gjs-selected">OUTBOUND
+              </h3>
+            </div>
+            <h3 id="i75oj">
+              <h4 id="ihy92-2-2" draggable="true">Depalletizing + Loading
+              </h4>
+            </h3>
+            <div id="igt7f">
+            </div>
+            <div id="i4k1s">RockyOne SE depalletizes, and RockyOne loads into containers. Multi-pick capability drives even higher throughput.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="iq33so">
+    <div class="gjs-row" id="i57nro">
+      <div class="gjs-cell" id="iwp533">
+        <img id="ig3bd-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/A5D6DA3E-A709-494D-90ED-7534CA480B56/easy-deployment-icon.svg"/>
+        <div id="ibmkh-2">
+          <h3 id="i50zd-2">Fast, Non-Disruptive Deployment
+          </h3>
+        </div>
+        <div id="ib0oh-2">Installs into existing facilities without infrastructure changes. The system connects directly to your current workflow with no downtime.
+        </div>
+      </div>
+      <div class="gjs-cell" id="ipdswx">
+        <img id="i2bzm-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/2E4F6ED0-5690-4AB4-A159-AF99BAB58661/mixed-case-handling-icon.svg"/>
+        <div id="is2ry-2">
+          <h3 id="i0rxs-2">Intelligent Mixed-Load Handling
+          </h3>
+        </div>
+        <div id="isvre-2">Handles diverse carton types and shuffled stacks with ease. Our planning algorithm optimizes loading patterns in real time to maximize cube utilization.
+        </div>
+      </div>
+      <div class="gjs-cell" id="ixk7xx">
+        <img id="i47cb-2" src="https://cdn.xyzrobotics.com/release/en-US/picture/7FB000DF-8CEE-41DD-A81A-B4236611C268/consistent-throughput-icon.svg"/>
+        <div id="if4hw-2">
+          <h3 id="id6yl-2">24/7 Predictable Throughput
+          </h3>
+        </div>
+        <div id="i8k53-2">Sustains consistent output across shifts, resilient to seasonal demand and operational variability.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="if9lkt">
+    <div id="i7ib6o">
+      <h2 id="i9v2fh">Global Success Stories
+      </h2>
+      <div class="gjs-row" id="iyog4r">
+        <div class="gjs-cell" id="ibwq9g">
+          <a href="https://youtu.be/H3z2FjHc4eQ" target="_blank" id="i3biqd" class="link-image"><img src="https://cdn.xyzrobotics.com/release/en-US/picture/8C924C9A-882D-47F4-806C-C3660013433E/case-study-1.webp" alt="Automated truck unloading at a home furnishings company in Japan" id="ipv5o7"/></a>
+        </div>
+        <div class="gjs-cell" id="iwrcec">
+          <a href="https://youtu.be/W_kEHhRVdr4" target="_blank" id="i3biqd-2" class="link-image"><img src="https://cdn.xyzrobotics.com/release/en-US/picture/C5C36920-30F8-4940-A3B0-48C7234E9C47/case-study-2.webp" alt="Automated truck unloading and palletizing at a major US 3PL" id="ipv5o7-2"/></a>
+        </div>
+        <div class="gjs-cell" id="i3q372">
+          <a href="https://youtu.be/EU3KWyF8u9s?si=iNJqmwB0GklirFRL" target="_blank" id="i3biqd-2-2" class="link-image"><img src="https://cdn.xyzrobotics.com/release/en-US/picture/E8F2AEDB-5CF3-44E1-999F-74C51A71529F/case-study-3.webp" alt="Automated trailer loading at a global food brand" id="ipv5o7-2-2"/></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="iox5x8">
+    <div id="ima0po">
+      <div class="gjs-row" id="ix75mf">
+        <div class="gjs-cell" id="i3g0ml">
+          <h2 id="idvckz">Bring 24/7 Predictability to Your Dock.
+          </h2>
+          <div id="iqos7h">Connect with our team to receive technical schematics and a tailored ROI analysis.
+          </div>
+          <img id="id48i9" src="https://cdn.xyzrobotics.com/release/en-US/picture/B0D03A6E-9158-484D-9188-91446CEBC28A/Rocky-Series-MMR-brochure-cover-image.png"/>
+          <div id="iw08cd">✓ FREE SOLUTION PACKAGE
+          </div>
+        </div>
+        <div class="gjs-cell" id="iiub2q">
+          <form method="get" class="custom-form-1777260350847-kmbm5iu5c">
+            <div class="form-group">
+              <div class="form-item">
+                <label id="ifq5dg">NAME</label>
+                <input type="text" name="name" placeholder="Name" id="igzq9j" required/>
+              </div>
+              <div class="form-item">
+                <label id="i9fk3b">COMPANY NAME</label>
+                <input type="text" name="company" placeholder="Company Name" id="ij79sv" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-item">
+                <label id="irdkda">POSITION</label>
+                <input type="text" name="position" placeholder="Position" id="it1e7x"/>
+              </div>
+              <div class="form-item">
+                <label id="ijwuhh">WORK EMAIL</label>
+                <input type="email" name="email" placeholder="Email" id="ikplxm" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-item">
+                <label id="i38azq"> INQUIRY APPLICATION</label>
+                <select id="iwdgsf" required name="inquiry_application"><option value="Choose your application...">Choose your application...</option><option value="opt1">Truck Unloading</option><option value="opt2">Truck Loading</option><option value="opt3">Depalletizing</option><option value="opt4">Palletizing</option><option value="opt5">Other</option></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-item">
+                <label id="ivjy4f"><span id="i4n0gf">Additional Notes (Optional)</span></label>
+                <textarea name="requirement" placeholder="E.g., annual container volume, typical SKU dimensions..." id="ivi2zo"></textarea>
+              </div>
+            </div>
+            <div class="form-group checkbox-group">
+              <div class="form-item">
+                <label class="checkbox-label checkbox-label-privacy-policy"><input type="checkbox" name="privacy policy" required="true" autocomplete="off"/><span class="checkbox-label-text">I have read and consent to
+                  <a href="https://www.xyzrobotics.com/privacy-policy" target="_blank" id="irhdin">the privacy policy.</a></span></label>
+              </div>
+            </div>
+            <div id="recaptcha_container_publicity">
+            </div>
+            <button type="submit" id="i8h55z">Get the Solution Package</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
